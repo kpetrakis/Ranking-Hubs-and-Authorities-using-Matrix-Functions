@@ -1,0 +1,34 @@
+Problem = ssget(1172); % Harvard500 
+% Problem = ssget(2784); % email-eu-core
+% Problem = ssget(1486); % Pajek/GD95_b
+% Problem = ssget(1458); % Pajek/CSPhd
+% Problem = ssget(1518); % Pajek/Roget
+% Problem = ssget(1487); % Pajek/GD95_c
+% Problem = ssget(2777); % SNAP/CollegeMsg
+% Problem = ssget(1481); % Pajek/GD02_a
+% Problem = ssget(1482); % Pajek/GD02_b
+% Problem = ssget(1491); % Pajek/GD96_d
+
+A = Problem.A;
+G = digraph(A);
+A_sym = symm_adjacency(A);
+eigs(A_sym)
+plot(G,'Layout','force')
+
+G_bip = graph(A_sym);
+l = eig(A_sym);
+plot(l,'o')
+
+e_A = expm(A_sym);
+hits_hubs = hits_top_hubs(G);
+hits_auths = hits_top_auth(G);
+exp_hubs = exp_top_hubs(e_A);
+exp_auths = exp_top_auths(e_A);
+
+hits_hubs
+
+exp_hubs
+
+hits_auths
+
+exp_auths
